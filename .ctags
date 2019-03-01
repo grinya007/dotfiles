@@ -1,0 +1,4 @@
+--regex-perl=/^\s*has\s+['"]?([0-9a-zA-Z_]+)/\1/a,attributes/
+--regex-perl=/^\s*runmode\s+([0-9a-zA-Z_]+)/\1/r,runmodes/
+--regex-perl=/^\s*errormode\s+([0-9a-zA-Z_]+)/\1/e,errormodes/
+--regex-perl=/^\s*(override|around|before|after)\s+['"]?([0-9a-zA-Z_]+)/\2/m,modifiers/

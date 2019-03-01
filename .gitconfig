@@ -1,0 +1,24 @@
+[merge]
+    tool = gdv
+[mergetool "gdv"]
+    cmd = gdv --copy-files --base=$BASE --local=$LOCAL --remote=$REMOTE --merged=$MERGED
+[user]
+    name = Gregory Arefyev
+    email = gregory@recom.live
+[alias]
+    l = log --pretty=format:\"%Cred%h%Creset %C(yellow)%an%Creset %s %Cgreen(%cr)%Creset\" --abbrev-commit
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr, %cn)%Creset' --abbrev-commit --date=relative
+    hist = log --graph --pretty=format:'%h %ad | %s%d [%an]' --date=short
+    last = log -1 HEAD
+    unstage = reset HEAD --
+    amend = commit --amend -C HEAD
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    delbranch = "!f() { git branch -D $@ && git push --delete origin $@; }; f"
+    pushforce = "!f() { git push --delete origin $1 && git push origin $1; }; f"
+[github]
+    user = grinya.guitar@gmail.com
+[rebase]
+    instructionFormat = (%an <%ae>) %s
