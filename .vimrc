@@ -102,7 +102,7 @@ set nocompatible
 
     " Awesome syntax checker.
     " REQUIREMENTS: See :h Syntastic
-    "Bundle 'vim-syntastic/syntastic'
+    Bundle 'vim-syntastic/syntastic'
 
     " Functions, class data etc.
     " REQUIREMENTS: ctags
@@ -110,6 +110,8 @@ set nocompatible
 
     Bundle 'mattn/webapi-vim'
     Bundle 'mattn/gist-vim'
+
+    Bundle 'inkarkat/vim-ShowTrailingWhitespace'
 
     " http://pastie.org
     " REQUIREMENTS: ruby in $PATH (not vim compiled with +ruby)
@@ -474,7 +476,19 @@ set nocompatible
     map <leader>g :Gist -p<cr>
 
     nmap <leader>d :Gblame<cr>
-    "nmap <leader>s :SyntasticCheck<CR>
+
+    let g:syntastic_mode_map = {'mode': 'passive'}
+    function! ToggleSyntastic()
+        if exists('b:check_active') && b:check_active
+            let b:check_active = 0
+            call SyntasticReset()
+        else
+            let b:check_active = 1
+            call SyntasticCheck()
+        endif
+    endfunction
+    nmap <leader>s :call ToggleSyntastic()<CR>
+
     nmap <leader>= :vertical resize +10<CR>
     nmap <leader>- :vertical resize -10<CR>
 
@@ -532,6 +546,8 @@ set nocompatible
     autocmd FileType qf nnoremap <buffer> q :cclose<CR>
     autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
+    let g:syntastic_python_python_exec = 'python3'
+    let g:syntastic_python_checkers = ['pylint']
     "let g:syntastic_perl_checkers = ['perl']
     "let g:syntastic_enable_perl_checker = 1
     "set statusline+=%#warningmsg#
