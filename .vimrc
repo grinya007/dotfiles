@@ -209,8 +209,8 @@ set nocompatible
     set linebreak                                   " don't cut words on wrap
     set listchars=tab:>\                            " > to highlight <tab>
     set list                                        " displaying listchars
-    "set mouse=                                      " disable mouse
-    set mouse=a                                     " mouse in all modes
+    set mouse=                                      " disable mouse
+    "set mouse=a                                     " mouse in all modes
     set noshowmode                                  " hide mode, got powerline
     set noexrc                                      " don't use other .*rc(s)
     set nostartofline                               " keep cursor column pos
@@ -520,7 +520,7 @@ set nocompatible
         \ 'file': '\v\.(exe|so|dll|class|jar)$',
         \ 'link': 'some_bad_symbolic_links',
         \ }
-    
+
     au FileType perl setl sw=2 sts=2 et
     au FileType xml setl sw=2 sts=2 et
     au FileType html setl sw=2 sts=2 et
