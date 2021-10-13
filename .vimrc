@@ -58,9 +58,10 @@ set nocompatible
     Bundle 'jdevera/vim-protobuf-syntax'
 
     " A much better statusline
-    "Bundle 'Lokaltog/vim-powerline'
-    Bundle 'vim-airline/vim-airline'
-    Bundle 'vim-airline/vim-airline-themes'
+    Bundle 'Lokaltog/vim-powerline'
+    "Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+    "Bundle 'vim-airline/vim-airline'
+    "Bundle 'vim-airline/vim-airline-themes'
 
     " Easy... motions... yeah.
     "Bundle 'Lokaltog/vim-easymotion'
@@ -182,13 +183,15 @@ set nocompatible
             set encoding=utf-8                    " for Powerline glyphs
         """ }}}
         """ Gvim {{{
-            set guifont=DejaVu_Sans_Mono_for_Powerline:h10
+            set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
             set guioptions-=m                       " remove menubar
             set guioptions-=T                       " remove toolbar
             set guioptions-=r                       " remove right scrollbar
         """ }}}
         """ Powerline {{{
-            "let g:Powerline_symbols = 'fancy'  " see :h Powerline_symbols
+            let g:Powerline_symbols = 'fancy'  " see :h Powerline_symbols
+            let g:Powerline_dividers_override = ["\Ue0b0", "\Ue0b1", "\Ue0b2", "\Ue0b3"]
+            let g:Powerline_symbols_override = { 'BRANCH': "\Ue0a0", 'LINE': "\Ue0a1", 'RO': "\Ue0a2" }
             "let g:Powerline_symbols_override = {
                         "\ 'BRANCH': [0x2213],
                         "\ }                         " use ∓
@@ -555,5 +558,5 @@ set nocompatible
     let g:syntastic_python_python_exec = 'python3'
     let g:syntastic_python_checkers = ['mypy']
 
-    let g:airline_powerline_fonts = 1
-    let g:airline_theme='dark'
+    "let g:airline_powerline_fonts = 1
+    "let g:airline_theme='dark'
