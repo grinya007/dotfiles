@@ -58,10 +58,11 @@ set nocompatible
     Bundle 'jdevera/vim-protobuf-syntax'
 
     " A much better statusline
-    Bundle 'Lokaltog/vim-powerline'
+    "Bundle 'Lokaltog/vim-powerline'
+    Bundle 'vim-airline/vim-airline'
 
     " Easy... motions... yeah.
-    Bundle 'Lokaltog/vim-easymotion'
+    "Bundle 'Lokaltog/vim-easymotion'
 
     " Glorious colorscheme
     Bundle 'nanotech/jellybeans.vim'
@@ -99,6 +100,7 @@ set nocompatible
     "Bundle 'tomtom/tlib_vim'
     "Bundle 'honza/vim-snippets'
     "Bundle 'garbas/vim-snipmate'
+    Bundle 'inkarkat/vim-ingo-library'
 
     " Awesome syntax checker.
     " REQUIREMENTS: See :h Syntastic
@@ -110,8 +112,10 @@ set nocompatible
 
     Bundle 'mattn/webapi-vim'
     Bundle 'mattn/gist-vim'
+    Bundle 'nvie/vim-flake8'
+    Bundle 'integralist/vim-mypy'
 
-    Bundle 'inkarkat/vim-ShowTrailingWhitespace'
+    "Bundle 'inkarkat/vim-ShowTrailingWhitespace'
 
     " http://pastie.org
     " REQUIREMENTS: ruby in $PATH (not vim compiled with +ruby)
@@ -467,6 +471,7 @@ set nocompatible
     unmap <F4>
     map <F4> :BuffergatorToggle<CR>
     set pastetoggle=<F5>
+    map <F6> :Mypy<CR>
 
     nmap <leader>l :CtrlPBuffer<CR>
     nmap <leader>; :CtrlPMRUFiles<CR>
@@ -475,7 +480,7 @@ set nocompatible
     map <leader>r :NERDTreeFind<cr>
     map <leader>g :Gist -p<cr>
 
-    nmap <leader>d :Gblame<cr>
+    nmap <leader>d :Git blame<cr>
 
     let g:syntastic_mode_map = {'mode': 'passive'}
     function! ToggleSyntastic()
@@ -547,14 +552,6 @@ set nocompatible
     autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
     let g:syntastic_python_python_exec = 'python3'
-    let g:syntastic_python_checkers = ['pylint']
-    "let g:syntastic_perl_checkers = ['perl']
-    "let g:syntastic_enable_perl_checker = 1
-    "set statusline+=%#warningmsg#
-    "set statusline+=%{SyntasticStatuslineFlag()}
-    "set statusline+=%*
+    let g:syntastic_python_checkers = ['mypy']
 
-    "let g:syntastic_always_populate_loc_list = 1
-    "let g:syntastic_auto_loc_list = 1
-    "let g:syntastic_check_on_open = 1
-    "let g:syntastic_check_on_wq = 0
+    let g:airline_powerline_fonts = 1
