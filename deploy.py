@@ -13,3 +13,14 @@ for file in os.listdir(run_dir):
         if os.path.isfile(home_file):
             os.rename(home_file, home_file + bkp)
         os.symlink(dot_file, home_file)
+
+conf_dir = home_dir + '/.config'
+if not os.path.isdir(conf_dir):
+    os.mkdir(conf_dir)
+
+nvim_dir = conf_dir + '/nvim'
+if os.path.isdir(nvim_dir):
+    os.rename(nvim_dir, nvim_dir + bkp)
+
+os.symlink(run_dir + '/nvim', nvim_dir)
+
