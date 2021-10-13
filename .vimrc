@@ -60,6 +60,7 @@ set nocompatible
     " A much better statusline
     "Bundle 'Lokaltog/vim-powerline'
     Bundle 'vim-airline/vim-airline'
+    Bundle 'vim-airline/vim-airline-themes'
 
     " Easy... motions... yeah.
     "Bundle 'Lokaltog/vim-easymotion'
@@ -555,3 +556,4 @@ set nocompatible
     let g:syntastic_python_checkers = ['mypy']
 
     let g:airline_powerline_fonts = 1
+    let g:airline_theme='dark'
