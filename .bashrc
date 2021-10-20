@@ -5,7 +5,7 @@ LC_ALL='en_US.UTF-8'
 export LC_ALL
 PROMPT_COMMAND=
 export PROMPT_COMMAND
-EDITOR=vim
+EDITOR=nvim
 export EDITOR
 
 if command -v brew 1>/dev/null 2>&1; then
@@ -25,4 +25,4 @@ if [ -d $HOME/local/bin ]; then
     export PATH="$HOME/local/bin:$PATH"
 fi
 
-export TERM=xterm
+#export TERM=xterm
