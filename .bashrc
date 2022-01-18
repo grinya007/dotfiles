@@ -26,3 +26,4 @@ if [ -d $HOME/local/bin ]; then
 fi
 
 #export TERM=xterm
+. "$HOME/.cargo/env"

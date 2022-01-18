@@ -3,8 +3,8 @@
 [mergetool "gdv"]
     cmd = gdv --copy-files --base=$BASE --local=$LOCAL --remote=$REMOTE --merged=$MERGED
 [user]
-    name = Gregory Arefyev
-    email = grinya.guitar@gmail.com
+	name = Grigory Arefyev
+	email = Grigory.Arefyev@woodmac.com
 [alias]
     l = log --pretty=format:\"%Cred%h%Creset %C(yellow)%an%Creset %s %Cgreen(%cr)%Creset\" --abbrev-commit
     lh = "!f() { git l $@ | head; }; f"

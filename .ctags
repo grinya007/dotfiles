@@ -2,3 +2,15 @@
 --regex-perl=/^\s*runmode\s+([0-9a-zA-Z_]+)/\1/r,runmodes/
 --regex-perl=/^\s*errormode\s+([0-9a-zA-Z_]+)/\1/e,errormodes/
 --regex-perl=/^\s*(override|around|before|after)\s+['"]?([0-9a-zA-Z_]+)/\2/m,modifiers/
+
+--langdef=rust
+--langmap=rust:.rs
+--regex-rust=/[ \t]*fn[ \t]+([a-zA-Z0-9_]+)/\1/f,function/
+--regex-rust=/[ \t]*type[ \t]+([a-zA-Z0-9_]+)/\1/T,types/
+--regex-rust=/[ \t]*enum[ \t]+([a-zA-Z0-9_]+)/\1/T,types/
+--regex-rust=/[ \t]*struct[ \t]+([a-zA-Z0-9_]+)/\1/m,types/
+--regex-rust=/[ \t]*mod[ \t]+([a-zA-Z0-9_]+)/\1/m,modules/
+--regex-rust=/[ \t]*static[ \t]+([a-zA-Z0-9_]+)/\1/m,consts/
+--regex-rust=/[ \t]*trait[ \t]+([a-zA-Z0-9_]+)/\1/m,traits/
+--regex-rust=/[ \t]*impl[ \t]+([a-zA-Z0-9_]+)/\1/m,impls/
+--regex-rust=/[ \t]*macro_rules![ \t]+([a-zA-Z0-9_]+)/\1/m,macros/

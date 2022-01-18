@@ -1,3 +1,290 @@
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath = &runtimepath
-source ~/.vimrc
+" >> load plugins
+call plug#begin(stdpath('data') . 'vimplug')
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'williamboman/nvim-lsp-installer', { 'branch': 'main' }
+
+    " To enable more of the features of rust-analyzer, such as inlay hints and more!
+    Plug 'simrat39/rust-tools.nvim'
+    Plug 'hrsh7th/nvim-cmp'
+
+    Plug 'hrsh7th/nvim-compe'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+
+    Plug 'vim-airline/vim-airline'
+
+    Plug 'nikvdp/neomux'
+
+    Plug 'tpope/vim-ragtag'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-unimpaired'
+
+    Plug 'tpope/vim-eunuch'
+    Plug 'tpope/vim-fugitive'
+
+    Plug 'nanotech/jellybeans.vim'
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'scrooloose/nerdtree'
+    Plug 'simrat39/symbols-outline.nvim'
+call plug#end()
+
+
+
+" >> basic settings
+syntax on
+set nocompatible
+set number
+" set relativenumber    " this is nuts
+set ignorecase        " ignore case
+set smartcase         " but don't ignore it, when search string contains uppercase letters
+set incsearch         " do incremental searching
+set visualbell
+set expandtab
+set tabstop=4
+set ruler
+set smartindent
+set shiftwidth=4
+set hlsearch
+" set virtualedit=all  " this is weird when cursor can go beyond end of line
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set autoindent
+" set mouse=a  " mouse support
+set mouse=     " no
+
+set cursorline                              " hilight cursor line
+set noshowmode                              " hide mode, got powerline
+set cursorcolumn
+set nostartofline                           " keep cursor column pos
+set background=dark                         " we're using a dark bg
+colors jellybeans                           " select colorscheme
+highlight Normal ctermbg=NONE               " use terminal background
+highlight nonText ctermbg=NONE              " use terminal background
+
+
+let g:mapleader=","
+
+" >> Telescope bindings
+nnoremap <Leader>pp <cmd>lua require'telescope.builtin'.builtin{}<CR>
+
+" most recently used files
+nnoremap <Leader>; <cmd>lua require'telescope.builtin'.oldfiles{}<CR>
+
+" find buffer
+nnoremap <Leader>l <cmd>lua require'telescope.builtin'.buffers{}<CR>
+
+" find in current buffer
+nnoremap <Leader>/ <cmd>lua require'telescope.builtin'.current_buffer_fuzzy_find{}<CR>
+
+" bookmarks
+nnoremap <Leader>m <cmd>lua require'telescope.builtin'.marks{}<CR>
+
+" git files
+nnoremap <Leader>' <cmd>lua require'telescope.builtin'.git_files{}<CR>
+
+" all files
+nnoremap <Leader>bfs <cmd>lua require'telescope.builtin'.find_files{}<CR>
+
+" ripgrep like grep through dir
+nnoremap <Leader>rg <cmd>lua require'telescope.builtin'.live_grep{}<CR>
+
+" pick color scheme
+nnoremap <Leader>cs <cmd>lua require'telescope.builtin'.colorscheme{}<CR>
+
+" >> Airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme='dark'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.notexists = ''
+let g:airline_symbols.dirty=''
+
+" >> NERDCommenter
+let g:NERDCreateDefaultMappings = 0
+let g:NERDSpaceDelims = 1
+map <leader>. <Plug>NERDCommenterToggle
+
+" >> NERDTree
+map <F2> :NERDTreeToggle<CR>
+map <leader>r :NERDTreeFind<cr>
+nmap <leader>= :vertical resize +10<CR>
+nmap <leader>- :vertical resize -10<CR>
+
+
+" >> Lsp key bindings
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> K     <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting_sync(nil, 200)<CR>
+" nnoremap <silent> gh    <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+
+" Set updatetime for CursorHold
+" 300ms of no cursor movement to trigger CursorHold
+set updatetime=300
+" Show diagnostic popup on cursor hold
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)
+
+
+" Goto previous/next diagnostic warning/error
+nnoremap <silent> g[ <cmd>lua vim.diagnostic.goto_prev()<CR>
+nnoremap <silent> g] <cmd>lua vim.diagnostic.goto_next()<CR>
+" have a fixed column for the diagnostics to appear in
+" this removes the jitter when warnings/errors flow in
+set signcolumn=yes
+
+
+lua <<EOF
+require("lsp")
+require("treesitter")
+require("completion")
+local actions = require('telescope.actions')require('telescope').setup{
+  pickers = {
+    buffers = {
+      sort_lastused = true
+    }
+  }
+}
+EOF
+
+" Set completeopt to have a better completion experience
+" :help completeopt
+" menuone: popup even when there's only one match
+" noinsert: Do not insert text until a selection is made
+" noselect: Do not select, force user to select one from the menu
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing extra messages when using completion
+set shortmess+=c
+
+" Configure LSP through rust-tools.nvim plugin.
+" rust-tools will configure and enable certain LSP features for us.
+" See https://github.com/simrat39/rust-tools.nvim#configuration
+lua <<EOF
+local nvim_lsp = require'lspconfig'
+
+local on_attach = function(client)
+    require'completion'.on_attach(client)
+end
+
+local opts = {
+    tools = { -- rust-tools options
+        autoSetHints = true,
+        hover_with_actions = true,
+        inlay_hints = {
+            show_parameter_hints = false,
+            parameter_hints_prefix = "",
+            other_hints_prefix = "",
+        },
+    },
+    -- all the opts to send to nvim-lspconfig
+    -- these override the defaults set by rust-tools.nvim
+    -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+    server = {
+        -- on_attach is a callback called when the language server attachs to the buffer
+        on_attach = on_attach,
+        settings = {
+            -- to enable rust-analyzer settings visit:
+            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+            ["rust-analyzer"] = {
+                -- enable clippy on save
+                checkOnSave = {
+                    command = "clippy"
+                },
+                cargo = {
+                    allFeatures = true,
+                    loadOutDirsFromCheck = true,
+                },
+                assist = {
+                    importGranularity = "module",
+                    importPrefix = "by_self",
+                },
+                procMacro = {
+                    enable = true
+                },
+            }
+        }
+    },
+}
+
+require('rust-tools').setup(opts)
+EOF
+
+" Setup Completion
+" See https://github.com/hrsh7th/nvim-cmp#basic-configuration
+lua <<EOF
+local cmp = require'cmp'
+cmp.setup({
+  -- Enable LSP snippets
+  snippet = {
+    expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    -- Add tab support
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    })
+  },
+
+  -- Installed sources
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+    { name = 'path' },
+    { name = 'buffer' },
+  },
+})
+EOF
+
+lua <<EOF
+-- init.lua
+vim.g.symbols_outline = {
+    highlight_hovered_item = true,
+    show_guides = true,
+    auto_preview = true,
+    position = 'left',
+    relative_width = true,
+    width = 70,
+    auto_close = true,
+    show_numbers = false,
+    show_relative_numbers = false,
+    show_symbol_details = true,
+    preview_bg_highlight = '',
+    keymaps = { -- These keymaps can be a string or a table for multiple keys
+        close = {"<Esc>", "q"},
+        goto_location = "<Cr>",
+        focus_location = "o",
+        hover_symbol = "<C-space>",
+        toggle_preview = "K",
+        rename_symbol = "r",
+        code_actions = "a",
+    },
+    lsp_blacklist = {},
+    symbol_blacklist = {},
+}
+EOF
+map <F3> :SymbolsOutline<CR>
+map <leader>c :cclose<cr>
+

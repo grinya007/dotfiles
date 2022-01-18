@@ -39,7 +39,7 @@ set nocompatible
     "Bundle 'chrisbra/SudoEdit.vim'
 
     " <Tab> everything!
-    Bundle 'ervandew/supertab'
+    "Bundle 'ervandew/supertab'
 
     " Fuzzy finder (files, mru, etc)
     Bundle 'kien/ctrlp.vim'
@@ -114,7 +114,10 @@ set nocompatible
     Bundle 'mattn/webapi-vim'
     Bundle 'mattn/gist-vim'
     Bundle 'nvie/vim-flake8'
-    Bundle 'integralist/vim-mypy'
+    "Bundle 'integralist/vim-mypy'
+
+    Bundle 'ycm-core/YouCompleteMe'
+    "Bundle 'neoclide/coc.nvim'
 
     "Bundle 'inkarkat/vim-ShowTrailingWhitespace'
 
@@ -474,6 +477,8 @@ set nocompatible
     set pastetoggle=<F5>
     map <F6> :Mypy<CR>
 
+    nmap <leader>v :YcmCompleter GoTo<CR>
+    nmap <leader>f :YcmCompleter Format<CR>
     nmap <leader>l :CtrlPBuffer<CR>
     nmap <leader>; :CtrlPMRUFiles<CR>
     nmap <leader>' :CtrlP<CR>
@@ -513,6 +518,19 @@ set nocompatible
             \ 'a:attributes',
             \ 'm:modifiers',
             \ 'p:packages'
+        \ ]
+    \ }
+    let g:tagbar_type_rust = {
+        \ 'ctagstype'   : 'Rust',
+        \ 'kinds'       : [
+            \ 'f:function',
+            \ 'T:types',
+            \ 'm:types',
+            \ 'm:modules',
+            \ 'm:traits',
+            \ 'm:consts',
+            \ 'm:impls',
+            \ 'm:macros',
         \ ]
     \ }
 
@@ -562,3 +580,11 @@ set nocompatible
     endif
     let g:airline_symbols.notexists = ''
     let g:airline_symbols.dirty=''
+
+    let g:ycm_add_preview_to_completeopt = 0
+    let g:ycm_key_list_stop_completion = ['<C-y>', '<CR>']
+    inoremap <expr> <Tab> getline('.')[col('.')-2] !~ '^\s\?$' \|\| pumvisible()
+          \ ? '<C-N>' : '<Tab>'
+    set completeopt-=preview
+
+    let g:github_api_url = 'https://api.github.com'
