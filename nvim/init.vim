@@ -1,3 +1,7 @@
+" Based on
+"   - https://github.com/nikvdp/nvim-lsp-config
+"   - https://sharksforarms.dev/posts/neovim-rust/
+
 " >> load plugins
 call plug#begin(stdpath('data') . 'vimplug')
     Plug 'nvim-lua/plenary.nvim'
