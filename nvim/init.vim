@@ -12,9 +12,16 @@ call plug#begin(stdpath('data') . 'vimplug')
 
     " To enable more of the features of rust-analyzer, such as inlay hints and more!
     Plug 'simrat39/rust-tools.nvim'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-cmdline'
     Plug 'hrsh7th/nvim-cmp'
 
-    Plug 'hrsh7th/nvim-compe'
+    Plug 'hrsh7th/cmp-vsnip'
+    Plug 'hrsh7th/vim-vsnip'
+
+    " Plug 'hrsh7th/nvim-compe'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
@@ -107,6 +114,7 @@ let g:airline_symbols.notexists = ''
 let g:airline_symbols.dirty=''
 
 " >> NERDCommenter
+let g:NERDDefaultAlign = 'left'
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
 map <leader>. <Plug>NERDCommenterToggle
@@ -150,9 +158,9 @@ set signcolumn=yes
 
 
 lua <<EOF
-require("lsp")
-require("treesitter")
-require("completion")
+--require("lsp")
+--require("treesitter")
+--require('completion')
 local actions = require('telescope.actions')require('telescope').setup{
   pickers = {
     buffers = {
@@ -178,9 +186,9 @@ set shortmess+=c
 lua <<EOF
 local nvim_lsp = require'lspconfig'
 
-local on_attach = function(client)
-    require'completion'.on_attach(client)
-end
+--local on_attach = function(client)
+--    require'completion'.on_attach(client)
+--end
 
 local opts = {
     tools = { -- rust-tools options
