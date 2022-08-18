@@ -8,6 +8,9 @@ export PROMPT_COMMAND
 EDITOR=nvim
 export EDITOR
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
 if command -v brew 1>/dev/null 2>&1; then
     export PATH=$(brew --prefix)/bin:$(brew --prefix)/sbin:$PATH
 fi

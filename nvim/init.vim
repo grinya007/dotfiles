@@ -40,6 +40,7 @@ call plug#begin(stdpath('data') . 'vimplug')
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree'
     Plug 'simrat39/symbols-outline.nvim'
+    Plug 'bbrtj/vim-jsonviewer'
 call plug#end()
 
 
@@ -103,6 +104,9 @@ nnoremap <Leader>rg <cmd>lua require'telescope.builtin'.live_grep{}<CR>
 
 " pick color scheme
 nnoremap <Leader>cs <cmd>lua require'telescope.builtin'.colorscheme{}<CR>
+
+" jsonviewer
+nnoremap <Leader>j <cmd>call jsonviewer#init()<CR>
 
 " >> Airline
 let g:airline_powerline_fonts = 1
