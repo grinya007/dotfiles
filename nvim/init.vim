@@ -230,6 +230,8 @@ local opts = {
     },
 }
 
+require'lspconfig'.tsserver.setup {}
+
 require('rust-tools').setup(opts)
 EOF
 
