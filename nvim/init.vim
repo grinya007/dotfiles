@@ -2,13 +2,14 @@
 "   - https://github.com/nikvdp/nvim-lsp-config
 "   - https://sharksforarms.dev/posts/neovim-rust/
 
+call system("mkdir -p $HOME/.vim/{backup,plugin,undo}")
 " >> load plugins
 call plug#begin(stdpath('data') . 'vimplug')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lua/popup.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
     Plug 'neovim/nvim-lspconfig'
     Plug 'williamboman/nvim-lsp-installer', { 'branch': 'main' }
+    Plug 'kien/ctrlp.vim'
 
     " To enable more of the features of rust-analyzer, such as inlay hints and more!
     Plug 'simrat39/rust-tools.nvim'
@@ -75,35 +76,31 @@ colors jellybeans                           " select colorscheme
 highlight Normal ctermbg=NONE               " use terminal background
 highlight nonText ctermbg=NONE              " use terminal background
 
+if has('persistent_undo') && exists("&undodir")
+    set undodir=$HOME/.vim/undo/            " where to store undofiles
+    set undofile                            " enable undofile
+    set undolevels=500                      " max undos stored
+    set undoreload=10000                    " buffer stored undos
+endif
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \     exe "normal! g`\"" |
+    \ endif
 
 let g:mapleader=","
 
-" >> Telescope bindings
-nnoremap <Leader>pp <cmd>lua require'telescope.builtin'.builtin{}<CR>
+" >> CtrlP
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_clear_cache_on_exit = 1
+let g:ctrlp_max_files = 10000
+let g:ctrlp_max_depth = 8
+nmap <leader>l :CtrlPBuffer<CR>
+nmap <leader>; :CtrlPMRUFiles<CR>
+nmap <leader>' :CtrlP<CR>
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/](\.(git|hg|svn))$',
+    \ }
 
-" most recently used files
-nnoremap <Leader>; <cmd>lua require'telescope.builtin'.oldfiles{}<CR>
-
-" find buffer
-nnoremap <Leader>l <cmd>lua require'telescope.builtin'.buffers{}<CR>
-
-" find in current buffer
-nnoremap <Leader>/ <cmd>lua require'telescope.builtin'.current_buffer_fuzzy_find{}<CR>
-
-" bookmarks
-nnoremap <Leader>m <cmd>lua require'telescope.builtin'.marks{}<CR>
-
-" git files
-nnoremap <Leader>' <cmd>lua require'telescope.builtin'.git_files{}<CR>
-
-" all files
-nnoremap <Leader>bfs <cmd>lua require'telescope.builtin'.find_files{}<CR>
-
-" ripgrep like grep through dir
-nnoremap <Leader>rg <cmd>lua require'telescope.builtin'.live_grep{}<CR>
-
-" pick color scheme
-nnoremap <Leader>cs <cmd>lua require'telescope.builtin'.colorscheme{}<CR>
 
 " jsonviewer
 nnoremap <Leader>j <cmd>call jsonviewer#init()<CR>
@@ -160,19 +157,6 @@ nnoremap <silent> g] <cmd>lua vim.diagnostic.goto_next()<CR>
 " this removes the jitter when warnings/errors flow in
 set signcolumn=yes
 
-
-lua <<EOF
---require("lsp")
---require("treesitter")
---require('completion')
-local actions = require('telescope.actions')require('telescope').setup{
-  pickers = {
-    buffers = {
-      sort_lastused = true
-    }
-  }
-}
-EOF
 
 " Set completeopt to have a better completion experience
 " :help completeopt
