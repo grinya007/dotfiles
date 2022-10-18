@@ -10,6 +10,7 @@ call plug#begin(stdpath('data') . 'vimplug')
     Plug 'neovim/nvim-lspconfig'
     Plug 'williamboman/nvim-lsp-installer', { 'branch': 'main' }
     Plug 'kien/ctrlp.vim'
+    " Plug 'nvim-telescope/telescope.nvim'
 
     " To enable more of the features of rust-analyzer, such as inlay hints and more!
     Plug 'simrat39/rust-tools.nvim'
@@ -219,6 +220,7 @@ local opts = {
 }
 
 require'lspconfig'.tsserver.setup {}
+require'lspconfig'.pyright.setup {}
 
 require('rust-tools').setup(opts)
 EOF
@@ -262,31 +264,71 @@ EOF
 
 lua <<EOF
 -- init.lua
-vim.g.symbols_outline = {
-    highlight_hovered_item = true,
-    show_guides = true,
-    auto_preview = true,
-    position = 'left',
-    relative_width = true,
-    width = 70,
-    auto_close = true,
-    show_numbers = false,
-    show_relative_numbers = false,
-    show_symbol_details = true,
-    preview_bg_highlight = '',
-    keymaps = { -- These keymaps can be a string or a table for multiple keys
-        close = {"<Esc>", "q"},
-        goto_location = "<Cr>",
-        focus_location = "o",
-        hover_symbol = "<C-space>",
-        toggle_preview = "K",
-        rename_symbol = "r",
-        code_actions = "a",
-    },
-    lsp_blacklist = {},
-    symbol_blacklist = {},
+local opts = {
+  highlight_hovered_item = true,
+  show_guides = true,
+  auto_preview = false,
+  position = 'left',
+  relative_width = true,
+  width = 25,
+  auto_close = false,
+  show_numbers = false,
+  show_relative_numbers = false,
+  show_symbol_details = true,
+  preview_bg_highlight = 'Pmenu',
+  autofold_depth = nil,
+  auto_unfold_hover = true,
+  fold_markers = { '+', '+' },
+  wrap = false,
+  keymaps = { -- These keymaps can be a string or a table for multiple keys
+    close = {"<Esc>", "q"},
+    goto_location = "<Cr>",
+    focus_location = "o",
+    hover_symbol = "<C-space>",
+    toggle_preview = "K",
+    rename_symbol = "r",
+    code_actions = "a",
+    fold = "h",
+    unfold = "l",
+    fold_all = "W",
+    unfold_all = "E",
+    fold_reset = "R",
+  },
+  lsp_blacklist = {},
+  symbol_blacklist = {},
+  symbols = {
+    File = {icon = "F", hl = "TSURI"},
+    Module = {icon = "M", hl = "TSNamespace"},
+    Namespace = {icon = "N", hl = "TSNamespace"},
+    Package = {icon = "P", hl = "TSNamespace"},
+    Class = {icon = "C", hl = "TSType"},
+    Method = {icon = "m", hl = "TSMethod"},
+    Property = {icon = "p", hl = "TSMethod"},
+    Field = {icon = "f", hl = "TSField"},
+    Constructor = {icon = "", hl = "TSConstructor"},
+    Enum = {icon = "E", hl = "TSType"},
+    Interface = {icon = "I", hl = "TSType"},
+    Function = {icon = "fn", hl = "TSFunction"},
+    Variable = {icon = "v", hl = "TSConstant"},
+    Constant = {icon = "c", hl = "TSConstant"},
+    String = {icon = "s", hl = "TSString"},
+    Number = {icon = "n", hl = "TSNumber"},
+    Boolean = {icon = "b", hl = "TSBoolean"},
+    Array = {icon = "a", hl = "TSConstant"},
+    Object = {icon = "o", hl = "TSType"},
+    Key = {icon = "k", hl = "TSType"},
+    Null = {icon = "NULL", hl = "TSType"},
+    EnumMember = {icon = "mbr", hl = "TSField"},
+    Struct = {icon = "S", hl = "TSType"},
+    Event = {icon = "e", hl = "TSType"},
+    Operator = {icon = "+", hl = "TSOperator"},
+    TypeParameter = {icon = "T", hl = "TSParameter"}
+  }
 }
+
+require("symbols-outline").setup(opts)
 EOF
 map <F3> :SymbolsOutline<CR>
+
 map <leader>c :cclose<cr>
 
