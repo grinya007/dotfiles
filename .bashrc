@@ -21,12 +21,12 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 if [ -d $HOME/.local/bin ]; then
-    export PATH="$HOME/.local/bin:$PATH"
+    export PATH="$PATH:$HOME/.local/bin"
 fi
 
-if [ -d $HOME/.local/share/nvim/lsp_servers/rust ]; then
-    export PATH=$HOME/.local/share/nvim/lsp_servers/rust:$PATH
-fi
+# if [ -d $HOME/.local/share/nvim/lsp_servers/rust ]; then
+#     export PATH=$HOME/.local/share/nvim/lsp_servers/rust:$PATH
+# fi
 
 if [ -d $HOME/local/bin ]; then
     export PATH="$HOME/local/bin:$PATH"
@@ -34,4 +34,3 @@ fi
 
 #export TERM=xterm
 . "$HOME/.cargo/env"
-alias vim=nvim

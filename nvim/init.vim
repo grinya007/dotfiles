@@ -140,7 +140,7 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting_sync(nil, 200)<CR>
+nnoremap <silent> gf    <cmd>lua vim.lsp.buf.format(nil, 200)<CR>
 " nnoremap <silent> gh    <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
 
 " Set updatetime for CursorHold
@@ -148,7 +148,7 @@ nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting_sync(nil, 200)<CR>
 set updatetime=300
 " Show diagnostic popup on cursor hold
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
-autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)
+autocmd BufWritePre *.rs lua vim.lsp.buf.format(nil, 200)
 
 
 " Goto previous/next diagnostic warning/error
