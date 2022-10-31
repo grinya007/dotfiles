@@ -5,20 +5,19 @@
 call system("mkdir -p $HOME/.vim/{backup,plugin,undo}")
 " >> load plugins
 call plug#begin(stdpath('data') . 'vimplug')
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-lua/popup.nvim'
     Plug 'neovim/nvim-lspconfig'
     Plug 'williamboman/nvim-lsp-installer', { 'branch': 'main' }
     Plug 'kien/ctrlp.vim'
-    " Plug 'nvim-telescope/telescope.nvim'
 
     " To enable more of the features of rust-analyzer, such as inlay hints and more!
-    Plug 'simrat39/rust-tools.nvim'
+    Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-path'
     Plug 'hrsh7th/cmp-cmdline'
-    Plug 'hrsh7th/nvim-cmp'
+    Plug 'simrat39/rust-tools.nvim'
+    Plug 'rust-lang/rust.vim'
+    Plug 'j-hui/fidget.nvim'
 
     Plug 'hrsh7th/cmp-vsnip'
     Plug 'hrsh7th/vim-vsnip'
@@ -43,6 +42,9 @@ call plug#begin(stdpath('data') . 'vimplug')
     Plug 'scrooloose/nerdtree'
     Plug 'simrat39/symbols-outline.nvim'
     Plug 'bbrtj/vim-jsonviewer'
+
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
 call plug#end()
 
 
@@ -131,7 +133,6 @@ nmap <leader>- :vertical resize -10<CR>
 " >> Lsp key bindings
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-" nnoremap <silent> K     <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
@@ -141,7 +142,6 @@ nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> gf    <cmd>lua vim.lsp.buf.format(nil, 200)<CR>
-" nnoremap <silent> gh    <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
 
 " Set updatetime for CursorHold
 " 300ms of no cursor movement to trigger CursorHold
@@ -175,18 +175,17 @@ set shortmess+=c
 lua <<EOF
 local nvim_lsp = require'lspconfig'
 
---local on_attach = function(client)
---    require'completion'.on_attach(client)
---end
+local function on_attach(client, buffer)
+--
+end
 
 local opts = {
     tools = { -- rust-tools options
-        autoSetHints = true,
-        hover_with_actions = true,
         inlay_hints = {
+            auto = true,
             show_parameter_hints = false,
-            parameter_hints_prefix = "",
-            other_hints_prefix = "",
+            parameter_hints_prefix = " <- ",
+            other_hints_prefix = " -> ",
         },
     },
     -- all the opts to send to nvim-lspconfig
@@ -223,6 +222,8 @@ require'lspconfig'.tsserver.setup {}
 require'lspconfig'.pyright.setup {}
 
 require('rust-tools').setup(opts)
+require("fidget").setup()
+
 EOF
 
 " Setup Completion

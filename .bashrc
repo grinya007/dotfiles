@@ -24,9 +24,9 @@ if [ -d $HOME/.local/bin ]; then
     export PATH="$PATH:$HOME/.local/bin"
 fi
 
-# if [ -d $HOME/.local/share/nvim/lsp_servers/rust ]; then
-#     export PATH=$HOME/.local/share/nvim/lsp_servers/rust:$PATH
-# fi
+if [ -d $HOME/.local/share/nvim/lsp_servers/rust ]; then
+    export PATH=$HOME/.local/share/nvim/lsp_servers/rust:$PATH
+fi
 
 if [ -d $HOME/local/bin ]; then
     export PATH="$HOME/local/bin:$PATH"
