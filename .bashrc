@@ -24,6 +24,13 @@ if [ -d $HOME/.local/bin ]; then
     export PATH="$PATH:$HOME/.local/bin"
 fi
 
+if [ -d $HOME/.local/lib ]; then
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.local/lib"
+    if [ -f $HOME/.local/lib/redirect.so ]; then
+        export LD_PRELOAD=redirect.so
+    fi
+fi
+
 if [ -d $HOME/.local/share/nvim/lsp_servers/rust ]; then
     export PATH=$HOME/.local/share/nvim/lsp_servers/rust:$PATH
 fi
@@ -36,10 +43,6 @@ if [ -d $HOME/.local/gurobi952 ]; then
     export GUROBI_HOME="$HOME/.local/gurobi952/linux64"
     export GRB_LICENSE_FILE="$HOME/.local/gurobi952/gurobi.lic"
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$GUROBI_HOME/lib"
-    if [ -f $GUROBI_HOME/lib/redirect.so ]; then
-        export REDIRECT=80:8282
-        export LD_PRELOAD=redirect.so
-    fi
 fi
 
 
