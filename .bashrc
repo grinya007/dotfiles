@@ -22,7 +22,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 if [ -d $HOME/.local/bin ]; then
-    export PATH="$PATH:$HOME/.local/bin"
+    export PATH="$HOME/.local/bin:$PATH"
 fi
 
 if [ -d $HOME/.local/lib ]; then
