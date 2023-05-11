@@ -129,6 +129,7 @@ map <leader>r :NERDTreeFind<cr>
 nmap <leader>= :vertical resize +10<CR>
 nmap <leader>- :vertical resize -10<CR>
 
+set pastetoggle=<F5>
 
 " >> Lsp key bindings
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
@@ -176,7 +177,7 @@ lua <<EOF
 local nvim_lsp = require'lspconfig'
 
 local function on_attach(client, buffer)
---
+    client.server_capabilities.semanticTokensProvider = nil
 end
 
 local opts = {
@@ -219,7 +220,33 @@ local opts = {
 }
 
 require'lspconfig'.tsserver.setup {}
-require'lspconfig'.pyright.setup {}
+require'lspconfig'.pylsp.setup {
+    settings = {
+        pylsp = {
+            plugins = {
+                pylsp_mypy = { enabled = false },
+                mccabe = { enabled = false },
+                ruff = { enabled = true },
+                rope = { enabled = true },
+                pycodestyle = { enabled = false },
+                pyflakes = { enabled = false },
+                rope_autoimport = {
+                    enabled = true,
+                },
+            },
+        },
+        ruff_lsp = {
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { "vim" },
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+        },
+    },
+}
 
 require('rust-tools').setup(opts)
 require("fidget").setup()

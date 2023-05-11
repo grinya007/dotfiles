@@ -1,7 +1,8 @@
 PS1="\[\033[01;33m\]$USER\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
 export PAGER='less -S'
 HISTSIZE=20000
-LC_ALL='en_US.UTF-8'
+LC_ALL=en_US.UTF-8
+
 export LC_ALL
 PROMPT_COMMAND=
 export PROMPT_COMMAND
@@ -39,12 +40,17 @@ if [ -d $HOME/local/bin ]; then
     export PATH="$HOME/local/bin:$PATH"
 fi
 
-if [ -d $HOME/.local/gurobi952 ]; then
-    export GUROBI_HOME="$HOME/.local/gurobi952/linux64"
-    export GRB_LICENSE_FILE="$HOME/.local/gurobi952/gurobi.lic"
+if [ -d $HOME/.local/gurobi1001 ]; then
+    export GUROBI_HOME="$HOME/.local/gurobi1001/linux64"
+    export GRB_LICENSE_FILE="$HOME/.local/gurobi1001/gurobi.lic"
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$GUROBI_HOME/lib"
 fi
 
 
-#export TERM=xterm
+# export TERM=xterm-24bit
 . "$HOME/.cargo/env"
+
+unset TMUX
+alias to="tmux -L outer -f .tmux.outer.conf"
+alias ti="tmux -L inner -f .tmux.conf"
+
