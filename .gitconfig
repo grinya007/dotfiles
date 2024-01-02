@@ -23,3 +23,5 @@
     user = grinya.guitar@gmail.com
 [rebase]
     instructionFormat = (%an <%ae>) %s
+[credential]
+	helper = "!f() { echo \"username=I28107_verisk\"; echo \"password=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\"; }; f"

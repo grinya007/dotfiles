@@ -5,3 +5,4 @@ defbce on    # use current bg color for erased chars
 escape ^Bb
 term screen-256color
 maptimeout 5
+vbell off

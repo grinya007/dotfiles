@@ -17,7 +17,7 @@ call plug#begin(stdpath('data') . 'vimplug')
     Plug 'hrsh7th/cmp-cmdline'
     Plug 'simrat39/rust-tools.nvim'
     Plug 'rust-lang/rust.vim'
-    Plug 'j-hui/fidget.nvim'
+    Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
 
     Plug 'hrsh7th/cmp-vsnip'
     Plug 'hrsh7th/vim-vsnip'
@@ -45,6 +45,7 @@ call plug#begin(stdpath('data') . 'vimplug')
 
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
+    Plug 'pest-parser/pest.vim'
 call plug#end()
 
 
@@ -90,18 +91,21 @@ autocmd BufReadPost *
     \     exe "normal! g`\"" |
     \ endif
 
+autocmd FileType perl setlocal shiftwidth=2 softtabstop=2 expandtab
+
 let g:mapleader=","
 
 " >> CtrlP
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_use_caching = 1
 let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_max_files = 10000
-let g:ctrlp_max_depth = 8
+let g:ctrlp_max_depth = 12
 nmap <leader>l :CtrlPBuffer<CR>
 nmap <leader>; :CtrlPMRUFiles<CR>
 nmap <leader>' :CtrlP<CR>
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](\.(git|hg|svn))$',
+    \ 'dir':  '\v[\/](\.git|node_modules|target)$',
     \ }
 
 
@@ -250,6 +254,17 @@ require'lspconfig'.pylsp.setup {
 
 require('rust-tools').setup(opts)
 require("fidget").setup()
+
+require'lspconfig'.perlpls.setup {
+    perl = {
+        perlcritic = {
+            enabled = false
+        },
+        syntax = {
+            enabled = false
+        },
+    },
+}
 
 EOF
 
