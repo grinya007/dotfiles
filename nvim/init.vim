@@ -41,7 +41,12 @@ call plug#begin(stdpath('data') . 'vimplug')
     " Plug 'bluz71/vim-moonfly-colors', { 'as': 'moonfly' }
     " Plug 'kepano/flexoki-neovim', { 'as': 'flexoki' }
     " Plug 'rebelot/kanagawa.nvim'
-    Plug 'ramojus/mellifluous.nvim'
+    " Plug 'ramojus/mellifluous.nvim'
+    " Plug 'dasupradyumna/midnight.nvim'
+    " Plug 'B4mbus/oxocarbon-lua.nvim'
+    " Plug 'HoNamDuong/hybrid.nvim'
+    " Plug 'romainl/Apprentice'
+    Plug 'grinya007/melange-nvim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree'
     Plug 'simrat39/symbols-outline.nvim'
@@ -81,10 +86,18 @@ set noshowmode                              " hide mode, got powerline
 set cursorcolumn
 set nostartofline                           " keep cursor column pos
 set background=dark                         " we're using a dark bg
+set termguicolors
 " colorscheme moonfly
 " colorscheme flexoki-dark
 " colorscheme kanagawa-dragon
-colorscheme mellifluous
+" colorscheme mellifluous
+" colorscheme midnight
+" colorscheme oxocarbon-lua
+" colorscheme hybrid
+" colorscheme midnight
+" colorscheme slate
+" colorscheme apprentice
+colorscheme melange
 highlight Normal ctermbg=NONE               " use terminal background
 highlight nonText ctermbg=NONE              " use terminal background
 
@@ -122,8 +135,7 @@ nnoremap <Leader>j <cmd>call jsonviewer#init()<CR>
 
 " >> Airline
 let g:airline_powerline_fonts = 1
-let g:airline_theme='dark'
-" let g:airline_theme='kanagawa-dragon'
+let g:airline_theme='badwolf'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -393,3 +405,4 @@ map <leader>aus <cmd>ArduinoUploadAndSerial<CR>
 map <leader>as <cmd>ArduinoSerial<CR>
 map <leader>ab <cmd>ArduinoChooseBoard<CR>
 map <leader>ap <cmd>ArduinoChooseProgrammer<CR>
+
