@@ -4,3 +4,6 @@ bold = { family = "Ubuntu Mono derivative Powerline", style = "Bold" }
 italic = { family = "Ubuntu Mono derivative Powerline", style = "Italic" }
 offset = { x = 0, y = 1 }
 size = 12
+
+[colors.primary]
+background = "#12100f"
