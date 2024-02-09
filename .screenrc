@@ -1,8 +1,11 @@
-term "screen-256color"
-hardstatus alwayslastline '%{= Kw}%H %c:%s %=%-Lw%{+b Wk}%n*%f %t%{-}%+Lw %=la: %l'
+truecolor on
 attrcolor b ".I"
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 defscrollback 10000
 maptimeout 5
 defbce on
 vbell off
+hardstatus off
+backtick 0 1 1 "/bin/date" '+%H:%M:%S'
+backtick 1 1 1 "/usr/bin/sh" -c 'cat /proc/loadavg | sed -E "s/([0-9.]+) ([0-9.]+) ([0-9.]+) .+/\1 \2 \3/"'
+hardstatus alwayslastline '%{#dddddd;#333333}%H %0` %=%-Lw%{+b #333333;#dddddd}%n%f %t%{-}%+Lw %= %1`'

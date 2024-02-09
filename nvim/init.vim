@@ -27,6 +27,7 @@ call plug#begin(stdpath('data') . 'vimplug')
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
     Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
 
     Plug 'nikvdp/neomux'
 
@@ -37,7 +38,10 @@ call plug#begin(stdpath('data') . 'vimplug')
     Plug 'tpope/vim-eunuch'
     Plug 'tpope/vim-fugitive'
 
-    Plug 'nanotech/jellybeans.vim'
+    " Plug 'bluz71/vim-moonfly-colors', { 'as': 'moonfly' }
+    " Plug 'kepano/flexoki-neovim', { 'as': 'flexoki' }
+    " Plug 'rebelot/kanagawa.nvim'
+    Plug 'ramojus/mellifluous.nvim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree'
     Plug 'simrat39/symbols-outline.nvim'
@@ -46,6 +50,7 @@ call plug#begin(stdpath('data') . 'vimplug')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'pest-parser/pest.vim'
+    Plug 'stevearc/vim-arduino'
 call plug#end()
 
 
@@ -76,7 +81,10 @@ set noshowmode                              " hide mode, got powerline
 set cursorcolumn
 set nostartofline                           " keep cursor column pos
 set background=dark                         " we're using a dark bg
-colors jellybeans                           " select colorscheme
+" colorscheme moonfly
+" colorscheme flexoki-dark
+" colorscheme kanagawa-dragon
+colorscheme mellifluous
 highlight Normal ctermbg=NONE               " use terminal background
 highlight nonText ctermbg=NONE              " use terminal background
 
@@ -115,6 +123,7 @@ nnoremap <Leader>j <cmd>call jsonviewer#init()<CR>
 " >> Airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='dark'
+" let g:airline_theme='kanagawa-dragon'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -374,4 +383,13 @@ EOF
 map <F3> :SymbolsOutline<CR>
 
 map <leader>c :cclose<cr>
+map <leader>b :Git blame<cr>
+map <leader>z :set hlsearch!<cr>
 
+map <leader>aa <cmd>ArduinoAttach<CR>
+map <leader>av <cmd>ArduinoVerify<CR>
+map <leader>au <cmd>ArduinoUpload<CR>
+map <leader>aus <cmd>ArduinoUploadAndSerial<CR>
+map <leader>as <cmd>ArduinoSerial<CR>
+map <leader>ab <cmd>ArduinoChooseBoard<CR>
+map <leader>ap <cmd>ArduinoChooseProgrammer<CR>
