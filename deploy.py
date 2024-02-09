@@ -18,6 +18,8 @@ conf_dir = home_dir + '/.config'
 if not os.path.isdir(conf_dir):
     os.mkdir(conf_dir)
 
+os.symlink(run_dir + '/alacritty.toml', conf_dir + '/alacritty.toml')
+
 nvim_dir = conf_dir + '/nvim'
 if os.path.isdir(nvim_dir):
     os.rename(nvim_dir, nvim_dir + bkp)
