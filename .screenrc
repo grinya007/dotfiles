@@ -1,6 +1,7 @@
-term alacritty
+term kitty
 truecolor on
 attrcolor b ".I"
+# termcapinfo alacritty
 defscrollback 10000
 maptimeout 5
 defbce on

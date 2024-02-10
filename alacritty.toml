@@ -1,9 +1,13 @@
-[font]
-normal = { family = "Ubuntu Mono derivative Powerline", style = "Regular" }
-bold = { family = "Ubuntu Mono derivative Powerline", style = "Bold" }
-italic = { family = "Ubuntu Mono derivative Powerline", style = "Italic" }
-offset = { x = 0, y = 1 }
-size = 12
+# [font]
+# normal = { family = "DejaVu Sans Mono for Powerline", style = "Book" }
+# bold = { family = "DejaVu Sans Mono for Powerline", style = "Bold" }
+# italic = { family = "DejaVu Sans Mono for Powerline", style = "Oblique" }
+# # offset = { x = 0, y = 2 }
+# size = 11
+# builtin_box_drawing = false
+
+[window]
+startup_mode = "Maximized"
 
 [colors.primary]
 background = "#12100f"

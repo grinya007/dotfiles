@@ -26,8 +26,7 @@ call plug#begin(stdpath('data') . 'vimplug')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+    Plug 'grinya007/vim-airline'
 
     Plug 'nikvdp/neomux'
 
@@ -38,14 +37,6 @@ call plug#begin(stdpath('data') . 'vimplug')
     Plug 'tpope/vim-eunuch'
     Plug 'tpope/vim-fugitive'
 
-    " Plug 'bluz71/vim-moonfly-colors', { 'as': 'moonfly' }
-    " Plug 'kepano/flexoki-neovim', { 'as': 'flexoki' }
-    " Plug 'rebelot/kanagawa.nvim'
-    " Plug 'ramojus/mellifluous.nvim'
-    " Plug 'dasupradyumna/midnight.nvim'
-    " Plug 'B4mbus/oxocarbon-lua.nvim'
-    " Plug 'HoNamDuong/hybrid.nvim'
-    " Plug 'romainl/Apprentice'
     Plug 'grinya007/melange-nvim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree'
@@ -87,16 +78,6 @@ set cursorcolumn
 set nostartofline                           " keep cursor column pos
 set background=dark                         " we're using a dark bg
 set termguicolors
-" colorscheme moonfly
-" colorscheme flexoki-dark
-" colorscheme kanagawa-dragon
-" colorscheme mellifluous
-" colorscheme midnight
-" colorscheme oxocarbon-lua
-" colorscheme hybrid
-" colorscheme midnight
-" colorscheme slate
-" colorscheme apprentice
 colorscheme melange
 highlight Normal ctermbg=NONE               " use terminal background
 highlight nonText ctermbg=NONE              " use terminal background
@@ -135,7 +116,7 @@ nnoremap <Leader>j <cmd>call jsonviewer#init()<CR>
 
 " >> Airline
 let g:airline_powerline_fonts = 1
-let g:airline_theme='badwolf'
+let g:airline_theme='dark'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
