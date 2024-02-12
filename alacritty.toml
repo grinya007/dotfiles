@@ -1,9 +1,7 @@
-# [font]
-# normal = { family = "DejaVu Sans Mono for Powerline", style = "Book" }
-# bold = { family = "DejaVu Sans Mono for Powerline", style = "Bold" }
-# italic = { family = "DejaVu Sans Mono for Powerline", style = "Oblique" }
-# # offset = { x = 0, y = 2 }
-# size = 11
+[font]
+normal = { family = "MartianMono Nerd Font Mono" }
+# offset = { x = 0, y = 0 }
+size = 9
 # builtin_box_drawing = false
 
 [window]

@@ -9,4 +9,4 @@ vbell off
 hardstatus off
 backtick 0 1 1 "/bin/date" '+%H:%M:%S'
 backtick 1 1 1 "/usr/bin/sh" -c 'cat /proc/loadavg | sed -E "s/([0-9.]+) ([0-9.]+) ([0-9.]+) .+/\1 \2 \3/"'
-hardstatus alwayslastline '%{#cccccc;#222222} %H %0` %=%-Lw%{+b #222222;#cccccc}%n%f %t%{-}%+Lw %= %1` '
+hardstatus alwayslastline '%{#ECE1D7;#211e1c} %H %0` %=%-Lw%{+b #211e1c;#ECE1D7}%n%f %t%{-}%+Lw %= %1` '
