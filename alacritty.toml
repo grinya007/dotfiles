@@ -1,8 +1,6 @@
 [font]
-normal = { family = "MartianMono Nerd Font Mono" }
-# offset = { x = 0, y = 0 }
+normal = { family = "Monoid Nerd Font Mono" }
 size = 9
-# builtin_box_drawing = false
 
 [window]
 startup_mode = "Maximized"

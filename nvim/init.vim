@@ -47,6 +47,7 @@ call plug#begin(stdpath('data') . 'vimplug')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'pest-parser/pest.vim'
     Plug 'stevearc/vim-arduino'
+    Plug 'karb94/neoscroll.nvim'
 call plug#end()
 
 
@@ -400,6 +401,9 @@ local opts = {
 }
 
 require("symbols-outline").setup(opts)
+require('neoscroll').setup({
+  performance_mode = true,
+})
 EOF
 map <F3> :SymbolsOutline<CR>
 
